@@ -1,9 +1,9 @@
-name: Generate Echo Manifests
+name: Generate echo dev eu-central-1 manifests
 
 on:
   push:
-#    branches:
-#      - main
+    branches:
+      - main
     paths:
       - 'charts/**'
       -  '**/echo.yaml'
@@ -21,7 +21,7 @@ jobs:
           version: v3.8.1
 
       - name: Generate template
-        run: helm template echo charts/service -f values/envs/dev/echo.yaml > echo.yaml
+        run: helm template echo charts/service -f values/envs/dev/echo.yaml -f values/regions/eu-central-1/echo.yaml > echo-dev-eu-central-1.yaml
 
       - name: Archive kubernetes manifests
         uses: actions/upload-artifact@v3
