@@ -9,7 +9,7 @@ on:
       -  '**/echo.yaml'
 
 jobs:
-  lint-test:
+  generate-echo-manifests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
