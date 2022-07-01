@@ -1,0 +1,30 @@
+name: Generate Echo Manifests
+
+on:
+  push:
+#    branches:
+#      - main
+    paths:
+      - 'charts/**'
+      -  '**/echo.yaml'
+
+jobs:
+  generate-echo-manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.8.1
+
+      - name: Generate template
+        run: helm template echo charts/service -f values/envs/dev/echo.yaml > echo.yaml
+
+      - name: Archive kubernetes manifests
+        uses: actions/upload-artifact@v3
+        with:
+          path: |
+            echo.yaml
