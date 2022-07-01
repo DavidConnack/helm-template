@@ -1,0 +1,4 @@
+image:
+  repository: hashicorp/http-echo
+  tag: latest
+  port: 5678
