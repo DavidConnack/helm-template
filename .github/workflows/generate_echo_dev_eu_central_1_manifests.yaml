@@ -27,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: |
-            echo.yaml
+            echo-dev-eu-central-1.yaml

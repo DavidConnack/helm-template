@@ -1,0 +1,21 @@
+{{ range .Values.applications}}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name }}
+  labels: {{ include "argoApplication.labels" $ | nindent 4 }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .project }}
+  source:
+    repoURL: {{.repository.url}}
+    targetRevision: {{.repository.branch}}
+    path: {{.repository.path}}
+  destination:
+    server: {{ .destination.server }}
+    namespace: {{ .name }}
+  syncPolicy:
+    {{- toYaml .syncPolicy | nindent 4 }}
+---
+{{end}}
