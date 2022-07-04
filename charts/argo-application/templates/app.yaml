@@ -16,6 +16,7 @@ spec:
     server: {{ .destination.server }}
     namespace: {{ .name }}
   syncPolicy:
-    {{- toYaml .syncPolicy | nindent 4 }}
+    {{- toYaml .syncPolicy | nindent 6 }}
+
 ---
 {{end}}
